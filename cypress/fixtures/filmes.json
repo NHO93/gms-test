@@ -11,8 +11,13 @@
         
     },
     {
-        "titulo": "O Senhor dos Anéis",
-        "ano": 2001,
-        "descricao": "Filme de ação e fantasia"
+        "titulo": "The Lord of the Rings: The Fellowship of the Ring",
+        "ano": 1972,
+        "descricao": "Filme de drama e crime"
+    },
+    {
+        "titulo": "The Lion King",
+        "ano": 1994,
+        "descricao": "Filme de animação e aventura"
     }
 ]

@@ -1,43 +1,46 @@
-/// <reference types="cypress" />
+///<reference types="cypress"/>
 
-describe('US-012-Funcionalidade: Cadastro de membros', () => {
+
+describe('Us-012-Funcionalidade: Cadastro de membros', () => {
   beforeEach(() => {
     cy.visit('/')
-  })
+  });
+
   afterEach(() => {
     cy.screenshot()
   });
 
-  it('Deve fazer Cadastro de campos obrigatorios', () => {
-   var email = `test${Date.now()}@test.com`
 
-    cy.preencherCadastro('sam', 'Soeset', email, '11999999999', 'T@123456')
-    cy.get('#signup-response').should('contain', 'Cadastro realizado com sucesso')
+  it('Deve fazer o cadastro de campos obrigatorios', () => {
+    var email = `cr${Date.now()}@teste.com`
+    cy.preencherCadastro('Caja', 'vlaca', email, '369887452155', 'Teste@2024')
+    cy.get('#signup-response').should('contain', 'Cadastro realizado com sucesso!')
+  });
+
+  it('Deve validar mensagem de erro com o campo nome invalido', () => {
+    cy.preencherCadastro('Caja20', 'vlac', 'cr@teste.com', '369887452155', 'Teste@2024')
+    cy.get('#signup-response').should('contain', 'Nome deve conter apenas caracteres alfabéticos')
+
+  });
+
+  it('Nao deve fazer o cadastro quando sobrenome invalido', () => {
+    var email = `carlos${Date.now()}@mail.com`
+    cy.preencherCadastro('Carlos', 'a1s2d3f4', email, '4799988556622', 'Teste!1234');
+
+    cy.get('#signup-response').should('contain', 'Sobrenome deve conter apenas caracteres alfabéticos, acentuados e espaços')
   })
 
- it('Deve validar mensagem com Nome inválido', () => {
-    cy.preencherCadastro('Test@', 'Seset', 'test@testando.com', '1197788996655', 'T@1234569')
-    cy.get('#signup-response').should('contain', 'Nome inválido')
-  })
+  it('Deve validar mensagem de erro de senha fraca', () => {
+    var email = `cr${Date.now()}@teste.com`
+    cy.preencherCadastro('Caja', 'Vlac', email, '369887452155', 'teste@2024')
+    cy.get('#signup-response').should('contain', 'Senha deve ter pelo menos 8 caracteres, incluir uma letra maiúscula, um número e um caractere especial')
 
-  it('Deve validar mensagem de erro no campo Email ', () => {
-    cy.preencherCadastro('Samm', 'Semm', '@tes4tando.com', '11988442236', 'T@1234568')
-    cy.get('#signup-response').should('contain', 'E-mail inválido')
-  })
+  });
 
-  it('Deve validar mensagem de erro do Sobrenome', () => {
-    cy.preencherCadastro('Cam', 'Ses4et@', 'sae34@tesn.com', '11966332255', 'T@1234567')
-      cy.get('#signup-response').should('contain', 'Sobrenome inválido')
-  })
+  it('Deve validar mensagem de erro email já cadastro', () => {
+    cy.preencherCadastro('Caja', 'Vlac', 'cr1720484759903@teste.com', '369887452155', 'Teste@2024')
+    cy.get('#signup-response').should('contain', 'Este email já está cadastrado')
 
-  it('Deve validar mensagem do campo Telefone', () => {
-    cy.preencherCadastro('Tessyte', 'Sestt', 'santos@test.com', '11', 'T@1234565')
-    cy.get('#signup-response').should('contain', 'Telefone inválido')
-  })
+  });
 
-  it('Deve validar mensagem de erro no campo de Senha', () => {
-    cy.preencherCadastro('Tette', 'Set', 'est@test.com', '11999889999', '1234')
-    cy.get('#signup-response').should('contain', 'Senha inválida')
-  })
-
-})
+});
