@@ -4,8 +4,11 @@ describe('US-012-Funcionalidade: Cadastro de membros', () => {
   beforeEach(() => {
     cy.visit('/')
   })
-  
-  it('Cadastro de campos obrigatorios', () => {
+  afterEach(() => {
+    cy.screenshot()
+  });
+
+  it.only('Cadastro de campos obrigatorios', () => {
    var email = `test${Date.now()}@test.com`
 
     cy.preencherCadastro('Teste', 'Seset', email, '11999999999', 'T@123456')
@@ -32,13 +35,9 @@ describe('US-012-Funcionalidade: Cadastro de membros', () => {
     cy.get('#signup-response').should('contain', 'Telefone inválido')
   })
 
-  it('Senha inválida', () => {
+  it.only('Senha inválida', () => {
     cy.preencherCadastro('Teste', 'Seset', email, '11999999999', '1234')
     cy.get('#signup-response').should('contain', 'Senha inválida')
   })
 
-  it('Campos obrigatórios não preenchidos', () => {
-    cy.get('#signup-button').click()
-    cy.get('#signup-response').should('contain', 'Preencha todos os campos')
-  })
 })

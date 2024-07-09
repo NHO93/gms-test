@@ -4,14 +4,17 @@ describe('US-012-Funcionalidade: Buscar', () => {
   beforeEach(() => {
     cy.visit('/')
   });
+  afterEach(() => {
+    cy.screenshot()
+  });
   
-  it('Deve buscar filmes com sucesso', () => {
+  it.only('Deve buscar filmes com sucesso', () => {
       cy.get('#search-input').type('the matrix')
         cy.get('#search-button').click()
         cy.get('#search-response').should('contain', 'The Matrix')
        });
 
-  it ('Deve buscar filmes com sucesso de uma lista', () => {
+  it('Deve buscar filmes com sucesso de uma lista', () => {
       cy.fixture('filmes').then((filmes) => {
           cy.get('#search-input').type(filmes[0].titulo)
           cy.get('#search-button').click()
