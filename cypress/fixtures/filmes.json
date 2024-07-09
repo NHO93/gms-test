@@ -1,0 +1,18 @@
+[
+    {
+        "titulo": "Matrix",
+        "ano": 1999,
+        "descricao": "Filme de ação e ficção científica"
+    },
+    {
+        "titulo": "Blade",
+        "ano": 1998,
+        "descricao": "Filme de ação e terror"
+        
+    },
+    {
+        "titulo": "O Senhor dos Anéis",
+        "ano": 2001,
+        "descricao": "Filme de ação e fantasia"
+    }
+]

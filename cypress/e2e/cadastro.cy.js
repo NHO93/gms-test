@@ -8,35 +8,35 @@ describe('US-012-Funcionalidade: Cadastro de membros', () => {
     cy.screenshot()
   });
 
-  it.only('Cadastro de campos obrigatorios', () => {
+  it('Deve fazer Cadastro de campos obrigatorios', () => {
    var email = `test${Date.now()}@test.com`
 
-    cy.preencherCadastro('Teste', 'Seset', email, '11999999999', 'T@123456')
+    cy.preencherCadastro('sam', 'Soeset', email, '11999999999', 'T@123456')
     cy.get('#signup-response').should('contain', 'Cadastro realizado com sucesso')
   })
 
-  it('Email já cadastrado', () => {
-    cy.preencherCadastro('Teste', 'Seset', email, '11999999999', 'T@123456')
-    cy.get('#signup-response').should('contain', 'E-mail já cadastrado')
-  })
-
-  it('Nome inválido', () => {
-    cy.preencherCadastro('Teste@', 'Seset', email, '11999999999', 'T@123456')
+ it('Deve validar mensagem com Nome inválido', () => {
+    cy.preencherCadastro('Test@', 'Seset', 'test@testando.com', '1197788996655', 'T@1234569')
     cy.get('#signup-response').should('contain', 'Nome inválido')
   })
 
-  it('Sobrenome inválido', () => {
-    cy.preencherCadastro('Teste', 'Seset@', email, '11999999999', 'T@123456')
+  it('Deve validar mensagem de erro no campo Email ', () => {
+    cy.preencherCadastro('Samm', 'Semm', '@tes4tando.com', '11988442236', 'T@1234568')
+    cy.get('#signup-response').should('contain', 'E-mail inválido')
+  })
+
+  it('Deve validar mensagem de erro do Sobrenome', () => {
+    cy.preencherCadastro('Cam', 'Ses4et@', 'sae34@tesn.com', '11966332255', 'T@1234567')
       cy.get('#signup-response').should('contain', 'Sobrenome inválido')
   })
 
-  it('Telefone inválido', () => {
-    cy.preencherCadastro('Teste', 'Seset', email, '1199999gf999', 'T@123456')
+  it('Deve validar mensagem do campo Telefone', () => {
+    cy.preencherCadastro('Tessyte', 'Sestt', 'santos@test.com', '11', 'T@1234565')
     cy.get('#signup-response').should('contain', 'Telefone inválido')
   })
 
-  it.only('Senha inválida', () => {
-    cy.preencherCadastro('Teste', 'Seset', email, '11999999999', '1234')
+  it('Deve validar mensagem de erro no campo de Senha', () => {
+    cy.preencherCadastro('Tette', 'Set', 'est@test.com', '11999889999', '1234')
     cy.get('#signup-response').should('contain', 'Senha inválida')
   })
 
